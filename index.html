@@ -37,13 +37,14 @@
     }
 
     footer {
+      display: none;
       margin: 2rem 0;
     }
   </style>
 </head>
 <body>
   <div id="content"></div>
-  <footer>
+  <footer id="footer">
     <small>Copyright &copy; <span id="year"></span> &bull; KP Zero &bull; All Rights Reserved</small>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -53,12 +54,13 @@
       try {
         const res = await fetch(url)
         const content = await res.text()
-        document.getElementById('content').innerHTML = marked.parse(content)
+          document.getElementById('content').innerHTML = marked.parse(content)
+          document.getElementById('footer').style = "display: block;"
+          document.getElementById("year").innerHTML = new Date().getFullYear()
       } catch (err) {
         console.error(err)
       }
     })()
-    document.getElementById("year").innerHTML = new Date().getFullYear()
   </script>
 </body>
 </html>
